@@ -26,8 +26,8 @@ const IndexPage = props => {
   const {
     data: {
       footerLinks: { html: footerLinksHTML },
-      copyright: { html: copyrightHTML },
       hero: { html: heroHTML },
+      copyright: { html: copyrightHTML },
     },
   } = props;
 
