@@ -11,12 +11,6 @@ import {
   Branding,
   Menu,
   Seo,
-  layout,
-  hero,
-  footer,
-  header,
-  branding,
-  menu,
 } from '../../../../mynpms/react-website-themes/src/default';
 
 import config from 'content/meta/config';
@@ -34,21 +28,13 @@ const IndexPage = props => {
   const { headerTitle, headerSubTitle } = config;
 
   return (
-    <Layout themeStyle={layout} menu={menu}>
-      <Header themeStyle={header} menu={menu}>
-        <Branding
-          themeStyle={branding}
-          title={headerTitle}
-          subTitle={headerSubTitle}
-        />
-        <Menu themeStyle={menu} items={menuItems} />
+    <Layout>
+      <Header>
+        <Branding title={headerTitle} subTitle={headerSubTitle} />
+        <Menu items={menuItems} />
       </Header>
-      <Hero themeStyle={hero} html={heroHTML} />
-      <Footer
-        themeStyle={footer}
-        links={footerLinksHTML}
-        copyright={copyrightHTML}
-      />
+      <Hero html={heroHTML} />
+      <Footer links={footerLinksHTML} copyright={copyrightHTML} />
       <Seo config={config} />
     </Layout>
   );

@@ -37,7 +37,6 @@ import {
   header,
   branding,
   menu,
-  article,
   heading,
   bodytext,
   meta,
@@ -102,7 +101,7 @@ const PostTemplate = props => {
         />
         <Menu themeStyle={menu} items={menuItems} />
       </Header>
-      <Article themeStyle={article}>
+      <Article>
         <Heading themeStyle={heading} title={title} />
         <Meta
           themeStyle={meta}
