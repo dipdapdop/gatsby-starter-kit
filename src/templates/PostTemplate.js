@@ -6,6 +6,24 @@ import 'prismjs/themes/prism-okaidia.css';
 
 import { ShareButtonRectangle } from 'react-custom-share';
 
+import Article from '@react-website-themes/default/components/Article';
+import Author from '@react-website-themes/default/components/Author';
+import Branding from '@react-website-themes/default/components/Branding';
+import Bodytext from '@react-website-themes/default/components/Bodytext';
+import Comments from '@react-website-themes/default/components/Comments';
+import Footer from '@react-website-themes/default/components/Footer';
+import Header from '@react-website-themes/default/components/Header';
+import Heading from '@react-website-themes/default/components/Heading';
+import Layout from '@react-website-themes/default/components/Layout';
+import Menu from '@react-website-themes/default/components/Menu';
+import Meta from '@react-website-themes/default/components/Meta';
+import NextPrev from '@react-website-themes/default/components/NextPrev';
+import Seo from '@react-website-themes/default/components/Seo';
+import Share from '@react-website-themes/default/components/Share';
+
+import config from 'content/meta/config';
+import menuItems from 'content/meta/menu';
+
 import CalendarIcon from 'react-feather/dist/icons/calendar';
 import UserIcon from 'react-feather/dist/icons/user';
 import TagIcon from 'react-feather/dist/icons/tag';
@@ -14,40 +32,6 @@ import NextIcon from 'react-feather/dist/icons/arrow-right';
 import FacebookIcon from 'react-feather/dist/icons/facebook';
 import TwitterIcon from 'react-feather/dist/icons/twitter';
 import EmailIcon from 'react-feather/dist/icons/mail';
-
-import {
-  // eslint-disable-next-line no-unused-vars
-  global,
-  Layout,
-  Footer,
-  Header,
-  Branding,
-  Menu,
-  Article,
-  Heading,
-  Bodytext,
-  Meta,
-  NextPrev,
-  Share,
-  Author,
-  Comments,
-  Seo,
-  layout,
-  footer,
-  header,
-  branding,
-  menu,
-  heading,
-  bodytext,
-  meta,
-  nextPrev,
-  share,
-  author,
-  comments,
-} from '../../../../mynpms/react-website-themes/src/default';
-
-import config from 'content/meta/config';
-import menuItems from 'content/meta/menu';
 
 const metaIcons = {
   calendar: CalendarIcon,
@@ -76,7 +60,14 @@ const PostTemplate = props => {
     pageContext: { next, prev },
   } = props;
 
-  const { headerTitle, headerSubTitle, siteUrl } = config;
+  const {
+    headerTitle,
+    headerSubTitle,
+    siteUrl,
+    siteTitle,
+    siteLanguage,
+    siteTitlePostfix,
+  } = config;
 
   const url = siteUrl + slug;
   const shareBlockProps = {
@@ -92,41 +83,32 @@ const PostTemplate = props => {
   };
 
   return (
-    <Layout themeStyle={layout} menu={menu}>
-      <Header themeStyle={header} menu={menu}>
-        <Branding
-          themeStyle={branding}
-          title={headerTitle}
-          subTitle={headerSubTitle}
-        />
-        <Menu themeStyle={menu} items={menuItems} />
+    <Layout>
+      <Header>
+        <Branding title={headerTitle} subTitle={headerSubTitle} />
+        <Menu items={menuItems} />
       </Header>
       <Article>
-        <Heading themeStyle={heading} title={title} />
+        <Heading title={title} />
         <Meta
-          themeStyle={meta}
           author="greg"
           prefix={prefix}
           categories={categories}
           icons={metaIcons}
         />
-        <Bodytext themeStyle={bodytext} html={postHTML} />
-        <Share themeStyle={share} shareBlockProps={shareBlockProps} />
-        <NextPrev
-          themeStyle={nextPrev}
-          next={next}
-          prev={prev}
-          icons={nextPrevIcons}
-        />
-        <Author themeStyle={author} html={authorHTML} />
-        <Comments slug={slug} siteUrl={siteUrl} themeStyle={comments} />
+        <Bodytext html={postHTML} />
+        <Share shareBlockProps={shareBlockProps} />
+        <NextPrev next={next} prev={prev} icons={nextPrevIcons} />
+        <Author html={authorHTML} />
+        <Comments slug={slug} siteUrl={siteUrl} />
       </Article>
-      <Footer
-        themeStyle={footer}
-        links={footerLinksHTML}
-        copyright={copyrightHTML}
+      <Footer links={footerLinksHTML} copyright={copyrightHTML} />
+      <Seo
+        url={`${siteUrl}${slug}`}
+        language={siteLanguage}
+        title={`${title}${siteTitlePostfix}`}
+        description={excerpt}
       />
-      <Seo config={config} />
     </Layout>
   );
 };

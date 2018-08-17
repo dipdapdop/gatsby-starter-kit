@@ -1,31 +1,19 @@
 import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import React from 'react';
-import FaTag from 'react-icons/lib/fa/tag';
+import TagIcon from 'react-feather/dist/icons/tag';
 
 import 'prismjs/themes/prism-okaidia.css';
 
-import {
-  // eslint-disable-next-line no-unused-vars
-  global,
-  Layout,
-  Footer,
-  Header,
-  Branding,
-  Menu,
-  Article,
-  Heading,
-  List,
-  Seo,
-  layout,
-  footer,
-  header,
-  branding,
-  menu,
-  article,
-  heading,
-  list,
-} from '../../../../mynpms/react-website-themes/src/default';
+import Article from '@react-website-themes/default/components/Article';
+import Branding from '@react-website-themes/default/components/Branding';
+import Footer from '@react-website-themes/default/components/Footer';
+import Header from '@react-website-themes/default/components/Header';
+import Heading from '@react-website-themes/default/components/Heading';
+import Layout from '@react-website-themes/default/components/Layout';
+import List from '@react-website-themes/default/components/List';
+import Menu from '@react-website-themes/default/components/Menu';
+import Seo from '@react-website-themes/default/components/Seo';
 
 import config from 'content/meta/config';
 import menuItems from 'content/meta/menu';
@@ -42,35 +30,40 @@ const PageTemplate = props => {
 
   const items = edges.map(edge => edge.node);
 
-  const { headerTitle, headerSubTitle } = config;
+  const {
+    headerTitle,
+    headerSubTitle,
+    siteUrl,
+    siteDescription,
+    siteLanguage,
+    siteTitlePostfix,
+  } = config;
 
   return (
-    <Layout themeStyle={layout} menu={menu}>
-      <Header themeStyle={header} menu={menu}>
-        <Branding
-          themeStyle={branding}
-          title={headerTitle}
-          subTitle={headerSubTitle}
-        />
-        <Menu themeStyle={menu} items={menuItems} />
+    <Layout>
+      <Header>
+        <Branding title={headerTitle} subTitle={headerSubTitle} />
+        <Menu items={menuItems} />
       </Header>
-      <Article themeStyle={article}>
-        <Heading themeStyle={heading}>
-          <span>Posts in category</span> <FaTag />
+      <Article>
+        <Heading>
+          <span>Posts in category</span> <TagIcon />
           <h1>{category}</h1>
           <p className="meta">
             There {totalCount > 1 ? 'are' : 'is'} <strong>{totalCount}</strong>{' '}
-            post{totalCount > 1 ? 's' : ''} in the category.
+            post
+            {totalCount > 1 ? 's' : ''} in the category.
           </p>
         </Heading>
-        <List themeStyle={list} items={items} />
+        <List items={items} />
       </Article>
-      <Footer
-        themeStyle={footer}
-        links={footerLinksHTML}
-        copyright={copyrightHTML}
+      <Footer links={footerLinksHTML} copyright={copyrightHTML} />
+      <Seo
+        url={`${siteUrl}/categories/${category}/`}
+        language={siteLanguage}
+        title={`Posts in category: ${category}${siteTitlePostfix}`}
+        description={siteDescription}
       />
-      <Seo config={config} />
     </Layout>
   );
 };

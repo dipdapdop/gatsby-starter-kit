@@ -1,17 +1,13 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 
-import {
-  // eslint-disable-next-line no-unused-vars
-  global,
-  Layout,
-  Hero,
-  Footer,
-  Header,
-  Branding,
-  Menu,
-  Seo,
-} from '../../../../mynpms/react-website-themes/src/default';
+import Branding from '@react-website-themes/default/components/Branding';
+import Footer from '@react-website-themes/default/components/Footer';
+import Header from '@react-website-themes/default/components/Header';
+import Hero from '@react-website-themes/default/components/Hero';
+import Layout from '@react-website-themes/default/components/Layout';
+import Menu from '@react-website-themes/default/components/Menu';
+import Seo from '@react-website-themes/default/components/Seo';
 
 import config from 'content/meta/config';
 import menuItems from 'content/meta/menu';
@@ -25,7 +21,14 @@ const IndexPage = props => {
     },
   } = props;
 
-  const { headerTitle, headerSubTitle } = config;
+  const {
+    headerTitle,
+    headerSubTitle,
+    siteUrl,
+    siteTitle,
+    siteDescription,
+    siteLanguage,
+  } = config;
 
   return (
     <Layout>
@@ -35,7 +38,12 @@ const IndexPage = props => {
       </Header>
       <Hero html={heroHTML} />
       <Footer links={footerLinksHTML} copyright={copyrightHTML} />
-      <Seo config={config} />
+      <Seo
+        url={siteUrl}
+        language={siteLanguage}
+        title={siteTitle}
+        description={siteDescription}
+      />
     </Layout>
   );
 };

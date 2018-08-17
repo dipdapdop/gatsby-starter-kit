@@ -1,27 +1,15 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 
-import {
-  // eslint-disable-next-line no-unused-vars
-  global,
-  Layout,
-  Footer,
-  Header,
-  Branding,
-  Menu,
-  Article,
-  Heading,
-  Bodytext,
-  Seo,
-  layout,
-  footer,
-  header,
-  branding,
-  menu,
-  article,
-  heading,
-  bodytext,
-} from '../../../../mynpms/react-website-themes/src/default';
+import Article from '@react-website-themes/default/components/Article';
+import Bodytext from '@react-website-themes/default/components/Bodytext';
+import Branding from '@react-website-themes/default/components/Branding';
+import Footer from '@react-website-themes/default/components/Footer';
+import Header from '@react-website-themes/default/components/Header';
+import Heading from '@react-website-themes/default/components/Heading';
+import Layout from '@react-website-themes/default/components/Layout';
+import Menu from '@react-website-themes/default/components/Menu';
+import Seo from '@react-website-themes/default/components/Seo';
 
 import config from 'content/meta/config';
 import menuItems from 'content/meta/menu';
@@ -35,28 +23,32 @@ const NotFoundPage = props => {
     },
   } = props;
 
-  const { headerTitle, headerSubTitle } = config;
+  const {
+    headerTitle,
+    headerSubTitle,
+    siteUrl,
+    siteTitle,
+    siteDescription,
+    siteLanguage,
+  } = config;
 
   return (
-    <Layout themeStyle={layout} menu={menu}>
-      <Header themeStyle={header} menu={menu}>
-        <Branding
-          themeStyle={branding}
-          title={headerTitle}
-          subTitle={headerSubTitle}
-        />
-        <Menu themeStyle={menu} items={menuItems} />
+    <Layout>
+      <Header>
+        <Branding title={headerTitle} subTitle={headerSubTitle} />
+        <Menu items={menuItems} />
       </Header>
-      <Article themeStyle={article}>
-        <Heading themeStyle={heading} title="NOT FOUND" />
-        <Bodytext themeStyle={bodytext} html={notFoundHTML} />
+      <Article>
+        <Heading title="NOT FOUND" />
+        <Bodytext html={notFoundHTML} />
       </Article>
-      <Footer
-        themeStyle={footer}
-        links={footerLinksHTML}
-        copyright={copyrightHTML}
+      <Footer links={footerLinksHTML} copyright={copyrightHTML} />
+      <Seo
+        url={siteUrl}
+        language={siteLanguage}
+        title={siteTitle}
+        description={siteDescription}
       />
-      <Seo config={config} />
     </Layout>
   );
 };
