@@ -24,6 +24,12 @@ export default class HTML extends React.Component {
             as="font"
             crossOrigin="anonymous"
           />
+          <link
+            rel="preload"
+            href="/static/merriweather-sans-latin-400italic-c8eb5cc40aee890d92234b636f33841c.woff2"
+            as="font"
+            crossOrigin="anonymous"
+          />
           <meta charSet="utf-8" />
           <meta httpEquiv="x-ua-compatible" content="ie=edge" />
           <meta
